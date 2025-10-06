@@ -4,8 +4,10 @@ from pydantic import BaseModel
 from prompts.observe_prompts import generate_observe_prompt
 import os
 from dotenv import load_dotenv
+from pathlib import Path
 
-load_dotenv()
+env_path = Path(__file__).parent.parent / '.env'
+load_dotenv(env_path)
 
 llm = ChatOpenAI(model='gpt-4o-mini', temperature=0, openai_api_key=os.getenv('OPENAI_API_KEY'))
 

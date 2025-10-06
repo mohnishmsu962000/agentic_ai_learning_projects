@@ -4,8 +4,10 @@ import os
 from dotenv import load_dotenv
 from pydantic import BaseModel
 from prompts.think_prompts import get_initial_prompt, get_followup_prompt
+from pathlib import Path
 
-load_dotenv()
+env_path = Path(__file__).parent.parent / '.env'
+load_dotenv(env_path)
 
 llm = ChatOpenAI(model = 'gpt-4o-mini',temperature=0, openai_api_key = os.getenv('OPENAI_API_KEY'))
 
@@ -38,5 +40,6 @@ def think_node(state: React_state) -> dict:
     
     return {
         'search_queries': state['search_queries'] + [search_query],
-        'thoughts': state['thoughts'] + [thought]
+        'thoughts': state['thoughts'] + [thought],
+        'iteration': state['iteration'] + 1
     }

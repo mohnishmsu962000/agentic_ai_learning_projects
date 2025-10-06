@@ -1,6 +1,12 @@
 from models.schemas import React_state
 from langchain_community.vectorstores import Chroma
 from langchain_openai import OpenAIEmbeddings
+from dotenv import load_dotenv
+import os
+from pathlib import Path
+
+env_path = Path(__file__).parent.parent / '.env'
+load_dotenv(env_path)
 
 vectorstore = Chroma(
     persist_directory="./chroma_data",
